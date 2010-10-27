@@ -86,8 +86,7 @@
 				else{
 					//clean up the FileReference instance
 					
-					main.processFile(svg_object);
-					main.loadCuts(svg);
+					main.processFile(svg_object,svg);
 					
 					fr = null;
 					

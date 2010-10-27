@@ -101,6 +101,11 @@
 						graphics.drawCircle(dlist[i].x*Global.zoom,-dlist[i].y*Global.zoom,(tooldiameter/2)*Global.zoom);
 						graphics.endFill();
 					}
+					else{
+						graphics.beginFill(0xeeeeee,0.5);
+						graphics.drawCircle(dlist[i].x*Global.zoom,-dlist[i].y*Global.zoom,(tooldiameter/2)*Global.zoom);
+						graphics.endFill();
+					}
 					if(active == false || processed == false){
 						graphics.lineStyle(1,0,1);
 					}
