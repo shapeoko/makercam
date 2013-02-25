@@ -2,25 +2,25 @@
   Copyright (c) 2008, Adobe Systems Incorporated
   All rights reserved.
 
-  Redistribution and use in source and binary forms, with or without 
+  Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice, 
+  * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
-  
+
   * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the 
+    notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-  
-  * Neither the name of Adobe Systems Incorporated nor the names of its 
-    contributors may be used to endorse or promote products derived from 
+
+  * Neither the name of Adobe Systems Incorporated nor the names of its
+    contributors may be used to endorse or promote products derived from
     this software without specific prior written permission.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
   IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
   THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -37,21 +37,21 @@ package com.adobe.utils
 	/**
 	* 	Class that contains static utility methods for manipulating and working
 	*	with Dates.
-	* 
+	*
 	* 	@langversion ActionScript 3.0
 	*	@playerversion Flash 9.0
 	*	@tiptext
-	*/	
+	*/
 	public class DateUtil
 	{
-	
+
 		/**
 		*	Returns the English Short Month name (3 letters) for the Month that
-		*	the Date represents.  	
-		* 
+		*	the Date represents.
+		*
 		* 	@param d The Date instance whose month will be used to retrieve the
 		*	short month name.
-		* 
+		*
 		* 	@return An English 3 Letter Month abbreviation.
 		*
 		* 	@langversion ActionScript 3.0
@@ -59,7 +59,7 @@ package com.adobe.utils
 		*	@tiptext
 		*
 		*	@see SHORT_MONTH
-		*/	
+		*/
 		public static function getShortMonthName(d:Date):String
 		{
 			return DateBase.monthNamesShort[d.getMonth()];
@@ -67,13 +67,13 @@ package com.adobe.utils
 
 		/**
 		*	Returns the index of the month that the short month name string
-		*	represents. 	
-		* 
+		*	represents.
+		*
 		* 	@param m The 3 letter abbreviation representing a short month name.
 		*
 		*	@param Optional parameter indicating whether the search should be case
 		*	sensitive
-		* 
+		*
 		* 	@return A int that represents that month represented by the specifed
 		*	short name.
 		*
@@ -82,19 +82,19 @@ package com.adobe.utils
 		*	@tiptext
 		*
 		*	@see SHORT_MONTH
-		*/	
+		*/
 		public static function getShortMonthIndex(m:String):int
 		{
 			return DateBase.monthNamesShort.indexOf(m);
 		}
-		
+
 		/**
 		*	Returns the English full Month name for the Month that
-		*	the Date represents.  	
-		* 
+		*	the Date represents.
+		*
 		* 	@param d The Date instance whose month will be used to retrieve the
 		*	full month name.
-		* 
+		*
 		* 	@return An English full month name.
 		*
 		* 	@langversion ActionScript 3.0
@@ -102,18 +102,18 @@ package com.adobe.utils
 		*	@tiptext
 		*
 		*	@see FULL_MONTH
-		*/	
+		*/
 		public static function getFullMonthName(d:Date):String
 		{
-			return DateBase.monthNamesLong[d.getMonth()];	
+			return DateBase.monthNamesLong[d.getMonth()];
 		}
 
 		/**
 		*	Returns the index of the month that the full month name string
-		*	represents. 	
-		* 
+		*	represents.
+		*
 		* 	@param m A full month name.
-		* 
+		*
 		* 	@return A int that represents that month represented by the specifed
 		*	full month name.
 		*
@@ -122,7 +122,7 @@ package com.adobe.utils
 		*	@tiptext
 		*
 		*	@see FULL_MONTH
-		*/	
+		*/
 		public static function getFullMonthIndex(m:String):int
 		{
 			return DateBase.monthNamesLong.indexOf(m);
@@ -130,11 +130,11 @@ package com.adobe.utils
 
 		/**
 		*	Returns the English Short Day name (3 letters) for the day that
-		*	the Date represents.  	
-		* 
+		*	the Date represents.
+		*
 		* 	@param d The Date instance whose day will be used to retrieve the
 		*	short day name.
-		* 
+		*
 		* 	@return An English 3 Letter day abbreviation.
 		*
 		* 	@langversion ActionScript 3.0
@@ -142,18 +142,18 @@ package com.adobe.utils
 		*	@tiptext
 		*
 		*	@see SHORT_DAY
-		*/	
+		*/
 		public static function getShortDayName(d:Date):String
 		{
-			return DateBase.dayNamesShort[d.getDay()];	
+			return DateBase.dayNamesShort[d.getDay()];
 		}
-		
+
 		/**
 		*	Returns the index of the day that the short day name string
-		*	represents. 	
-		* 
+		*	represents.
+		*
 		* 	@param m A short day name.
-		* 
+		*
 		* 	@return A int that represents that short day represented by the specifed
 		*	full month name.
 		*
@@ -162,7 +162,7 @@ package com.adobe.utils
 		*	@tiptext
 		*
 		*	@see SHORT_DAY
-		*/			
+		*/
 		public static function getShortDayIndex(d:String):int
 		{
 			return DateBase.dayNamesShort.indexOf(d);
@@ -170,11 +170,11 @@ package com.adobe.utils
 
 		/**
 		*	Returns the English full day name for the day that
-		*	the Date represents.  	
-		* 
+		*	the Date represents.
+		*
 		* 	@param d The Date instance whose day will be used to retrieve the
 		*	full day name.
-		* 
+		*
 		* 	@return An English full day name.
 		*
 		* 	@langversion ActionScript 3.0
@@ -182,18 +182,18 @@ package com.adobe.utils
 		*	@tiptext
 		*
 		*	@see FULL_DAY
-		*/	
+		*/
 		public static function getFullDayName(d:Date):String
 		{
-			return DateBase.dayNamesLong[d.getDay()];	
-		}		
+			return DateBase.dayNamesLong[d.getDay()];
+		}
 
 		/**
 		*	Returns the index of the day that the full day name string
-		*	represents. 	
-		* 
+		*	represents.
+		*
 		* 	@param m A full day name.
-		* 
+		*
 		* 	@return A int that represents that full day represented by the specifed
 		*	full month name.
 		*
@@ -202,30 +202,30 @@ package com.adobe.utils
 		*	@tiptext
 		*
 		*	@see FULL_DAY
-		*/		
+		*/
 		public static function getFullDayIndex(d:String):int
 		{
 			return DateBase.dayNamesLong.indexOf(d);
 		}
 
 		/**
-		*	Returns a two digit representation of the year represented by the 
+		*	Returns a two digit representation of the year represented by the
 		*	specified date.
-		* 
+		*
 		* 	@param d The Date instance whose year will be used to generate a two
 		*	digit string representation of the year.
-		* 
+		*
 		* 	@return A string that contains a 2 digit representation of the year.
 		*	Single digits will be padded with 0.
 		*
 		* 	@langversion ActionScript 3.0
 		*	@playerversion Flash 9.0
 		*	@tiptext
-		*/	
+		*/
 		public static function getShortYear(d:Date):String
 		{
 			var dStr:String = String(d.getFullYear());
-			
+
 			if(dStr.length < 3)
 			{
 				return dStr;
@@ -240,21 +240,21 @@ package com.adobe.utils
 		*	Returns -1 if d1 is greater than d2.
 		*	Returns 1 if d2 is greater than d1.
 		*	Returns 0 if both dates are equal.
-		* 
+		*
 		* 	@param d1 The date that will be compared to the second date.
 		*	@param d2 The date that will be compared to the first date.
-		* 
+		*
 		* 	@return An int indicating how the two dates compare.
 		*
 		* 	@langversion ActionScript 3.0
 		*	@playerversion Flash 9.0
 		*	@tiptext
-		*/	
+		*/
 		public static function compareDates(d1:Date, d2:Date):int
 		{
 			var d1ms:Number = d1.getTime();
 			var d2ms:Number = d2.getTime();
-			
+
 			if(d1ms > d2ms)
 			{
 				return -1;
@@ -276,19 +276,19 @@ package com.adobe.utils
 		*
 		*	If the hour is greater than 12 (12 - 23 PM) then the hour minus 12
 		*	will be returned.
-		* 
+		*
 		* 	@param d1 The Date from which to generate the short hour
-		* 
+		*
 		* 	@return An int between 0 and 13 ( 1 - 12 ) representing the short hour.
 		*
 		* 	@langversion ActionScript 3.0
 		*	@playerversion Flash 9.0
 		*	@tiptext
-		*/	
+		*/
 		public static function getShortHour(d:Date):int
 		{
 			var h:int = d.hours;
-			
+
 			if(h == 0 || h == 12)
 			{
 				return 12;
@@ -302,7 +302,7 @@ package com.adobe.utils
 				return h;
 			}
 		}
-		
+
 		/**
 		*	Returns a string indicating whether the date represents a time in the
 		*	ante meridiem (AM) or post meridiem (PM).
@@ -310,16 +310,16 @@ package com.adobe.utils
 		*	If the hour is less than 12 then "AM" will be returned.
 		*
 		*	If the hour is greater than 12 then "PM" will be returned.
-		* 
+		*
 		* 	@param d1 The Date from which to generate the 12 hour clock indicator.
-		* 
-		* 	@return A String ("AM" or "PM") indicating which half of the day the 
+		*
+		* 	@return A String ("AM" or "PM") indicating which half of the day the
 		*	hour represents.
 		*
 		* 	@langversion ActionScript 3.0
 		*	@playerversion Flash 9.0
 		*	@tiptext
-		*/	
+		*/
 		public static function getAMPM(d:Date):String
 		{
 			return (d.hours > 11)? "PM" : "AM";
@@ -341,7 +341,7 @@ package com.adobe.utils
 		* @tiptext
 		*
 		* @see http://asg.web.cmu.edu/rfc/rfc822.html
-		*/		
+		*/
 		public static function parseRFC822(str:String):Date
 		{
             var finalDate:Date;
@@ -349,12 +349,12 @@ package com.adobe.utils
 			{
 				var dateParts:Array = str.split(" ");
 				var day:String = null;
-				
+
 				if (dateParts[0].search(/\d/) == -1)
 				{
 					day = dateParts.shift().replace(/\W/, "");
 				}
-				
+
 				var date:Number = Number(dateParts.shift());
 				var month:Number = Number(DateUtil.getShortMonthIndex(dateParts.shift()));
 				var year:Number = Number(dateParts.shift());
@@ -362,9 +362,9 @@ package com.adobe.utils
 				var hour:Number = int(timeParts.shift());
 				var minute:Number = int(timeParts.shift());
 				var second:Number = (timeParts.length > 0) ? int(timeParts.shift()): 0;
-	
+
 				var milliseconds:Number = Date.UTC(year, month, date, hour, minute, second, 0);
-	
+
 				var timezone:String = dateParts.shift();
 				var offset:Number = 0;
 
@@ -457,7 +457,7 @@ package com.adobe.utils
 			}
             return finalDate;
 		}
-	     
+
 		/**
 		* Returns a date string formatted according to RFC822.
 		*
@@ -470,7 +470,7 @@ package com.adobe.utils
 		* @tiptext
 		*
 		* @see http://asg.web.cmu.edu/rfc/rfc822.html
-		*/	
+		*/
 		public static function toRFC822(d:Date):String
 		{
 			var date:Number = d.getUTCDate();
@@ -480,7 +480,7 @@ package com.adobe.utils
 			var sb:String = new String();
 			sb += DateBase.dayNamesShort[d.getUTCDay()];
 			sb += ", ";
-			
+
 			if (date < 10)
 			{
 				sb += "0";
@@ -493,26 +493,26 @@ package com.adobe.utils
 			sb += d.getUTCFullYear();
 			sb += " ";
 			if (hours < 10)
-			{			
+			{
 				sb += "0";
 			}
 			sb += hours;
 			sb += ":";
 			if (minutes < 10)
-			{			
+			{
 				sb += "0";
 			}
 			sb += minutes;
 			sb += ":";
 			if (seconds < 10)
-			{			
+			{
 				sb += "0";
 			}
 			sb += seconds;
 			sb += " GMT";
 			return sb;
 		}
-	     
+
 		/**
 		* Parses dates that conform to the W3C Date-time Format into Date objects.
 		*
@@ -527,7 +527,7 @@ package com.adobe.utils
 		* @tiptext
 		*
 		* @see http://www.w3.org/TR/NOTE-datetime
-		*/		     
+		*/
 		public static function parseW3CDTF(str:String):Date
 		{
             var finalDate:Date;
@@ -539,12 +539,12 @@ package com.adobe.utils
 				var year:Number = Number(dateArr.shift());
 				var month:Number = Number(dateArr.shift());
 				var date:Number = Number(dateArr.shift());
-				
+
 				var multiplier:Number;
 				var offsetHours:Number;
 				var offsetMinutes:Number;
 				var offsetStr:String;
-				
+
 				if (timeStr.indexOf("Z") != -1)
 				{
 					multiplier = 1;
@@ -577,7 +577,7 @@ package com.adobe.utils
 				var utc:Number = Date.UTC(year, month-1, date, hour, minutes, seconds, milliseconds);
 				var offset:Number = (((offsetHours * 3600000) + (offsetMinutes * 60000)) * multiplier);
 				finalDate = new Date(utc - offset);
-	
+
 				if (finalDate.toString() == "Invalid Date")
 				{
 					throw new Error("This date does not conform to W3CDTF.");
@@ -591,7 +591,7 @@ package com.adobe.utils
 			}
             return finalDate;
 		}
-	     
+
 		/**
 		* Returns a date string formatted according to W3CDTF.
 		*
@@ -606,7 +606,7 @@ package com.adobe.utils
 		* @tiptext
 		*
 		* @see http://www.w3.org/TR/NOTE-datetime
-		*/		     
+		*/
 		public static function toW3CDTF(d:Date,includeMilliseconds:Boolean=false):String
 		{
 			var date:Number = d.getUTCDate();
@@ -616,10 +616,10 @@ package com.adobe.utils
 			var seconds:Number = d.getUTCSeconds();
 			var milliseconds:Number = d.getUTCMilliseconds();
 			var sb:String = new String();
-			
+
 			sb += d.getUTCFullYear();
 			sb += "-";
-			
+
 			//thanks to "dom" who sent in a fix for the line below
 			if (month + 1 < 10)
 			{
@@ -658,7 +658,7 @@ package com.adobe.utils
 			sb += "-00:00";
 			return sb;
 		}
-		
+
 		/**
 		 * Converts a date into just after midnight.
 		 */
@@ -671,7 +671,7 @@ package com.adobe.utils
             d.milliseconds = 0;
             return d;
 		}
-		
+
 		/**
 		 * Converts a date into just befor midnight.
 		 */
@@ -681,7 +681,7 @@ package com.adobe.utils
 			d.hours = 23;
             d.minutes = 59;
             d.seconds = 59;
-            d.milliseconds = 999;				
+            d.milliseconds = 999;
             return d;
 		}
 
@@ -691,7 +691,7 @@ package com.adobe.utils
 		public static function getUTCDate(d:Date):Date
 		{
 			var nd:Date = new Date();
-			var offset:Number = d.getTimezoneOffset() * 60 * 1000; 
+			var offset:Number = d.getTimezoneOffset() * 60 * 1000;
 			nd.setTime(d.getTime() + offset);
 			return nd;
 		}

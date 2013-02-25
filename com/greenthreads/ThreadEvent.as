@@ -12,25 +12,25 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
- */ 
+ */
 package com.greenthreads {
-	
+
 	import flash.events.Event;
 
 	public class ThreadEvent extends Event {
-		
+
 		public static const TIMEOUT : String = "timeout";
-		
+
 		private var _thread : GreenThread;
-		
+
 		public function ThreadEvent(type:String, thread : GreenThread = null, bubbles:Boolean=false, cancelable:Boolean=false) {
 			super(type, bubbles, cancelable);
 			this._thread = thread;
 		}
-		
+
 		public function get thread() : GreenThread {
 			return _thread;
 		}
-		
+
 	}
 }

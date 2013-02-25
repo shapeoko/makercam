@@ -6,11 +6,11 @@
                 /**
                 *       Removes whitespace from the front and the end of the specified
                 *       string.
-                * 
+                *
                 *       @param input The String whose beginning and ending whitespace will
                 *       will be removed.
                 *
-                *       @returns A String with whitespace removed from the begining and end     
+                *       @returns A String with whitespace removed from the begining and end
                 *
                 *       @langversion ActionScript 3.0
                 *       @playerversion Flash 9.0
@@ -23,15 +23,15 @@
 
                 /**
                 *       Removes whitespace from the front of the specified string.
-                * 
+                *
                 *       @param input The String whose beginning whitespace will will be removed.
                 *
-                *       @returns A String with whitespace removed from the begining     
+                *       @returns A String with whitespace removed from the begining
                 *
                 *       @langversion ActionScript 3.0
                 *       @playerversion Flash 9.0
                 *       @tiptext
-                */      
+                */
                 public static function ltrim(input:String, char:String=" "):String
                 {
                         var size:Number = input.length;
@@ -47,15 +47,15 @@
 
                 /**
                 *       Removes whitespace from the end of the specified string.
-                * 
+                *
                 *       @param input The String whose ending whitespace will will be removed.
                 *
-                *       @returns A String with whitespace removed from the end  
+                *       @returns A String with whitespace removed from the end
                 *
                 *       @langversion ActionScript 3.0
                 *       @playerversion Flash 9.0
                 *       @tiptext
-                */      
+                */
                 public static function rtrim(input:String, char:String=" "):String
                 {
                         var size:Number = input.length;
@@ -72,7 +72,7 @@
 
                 /**
                 *       Removes all instances of the remove string in the input string.
-                * 
+                *
                 *       @param input The string that will be checked for instances of remove
                 *       string
                 *
@@ -83,7 +83,7 @@
                 *       @langversion ActionScript 3.0
                 *       @playerversion Flash 9.0
                 *       @tiptext
-                */      
+                */
                 public static function remove(input:String, remove:String):String
                 {
                         return StringUtil.replace(input, remove, "");
@@ -92,17 +92,17 @@
                 /**
                 *       Replaces all instances of the replace string in the input string
                 *       with the replaceWith string.
-                * 
-                *       @param input The string that instances of replace string will be 
+                *
+                *       @param input The string that instances of replace string will be
                 *       replaces with removeWith string.
                 *
-                *       @param replace The string that will be replaced by instances of 
+                *       @param replace The string that will be replaced by instances of
                 *       the replaceWith string.
                 *
                 *       @param replaceWith The string that will replace instances of replace
                 *       string.
                 *
-                *       @returns A new String with the replace string replaced with the 
+                *       @returns A new String with the replace string replaced with the
                 *       replaceWith string.
                 *
                 *       @langversion ActionScript 3.0
@@ -121,7 +121,7 @@
                         for (var i:Number = 0; i < sLen; i++)
                         {
                                 if(input.charAt(i) == replace.charAt(0))
-                                {   
+                                {
                                         found = true;
                                         for(var j:Number = 0; j < rLen; j++)
                                         {
@@ -145,8 +145,8 @@
                         //string?
                         return sb;
                 }
-                
-                        
+
+
                 /**
                 * @method shrinkSequencesOf (Groleau)
                 * @description Shrinks all sequences of a given character in a string to one
@@ -159,16 +159,16 @@
                         var idx:int = 0;
                         var idx2:int = 0;
                         var rs:String = "";
-                        
+
                         while ((idx2 = s.indexOf(ch, idx) + 1) != 0) {
                                 // include string up to first character in sequence
                                 rs += s.substring(idx, idx2);
                                 idx = idx2;
-                                
+
                                 // remove all subsequent characters in sequence
                                 while ((s.charAt(idx) == ch) && (idx < len)) idx++;
                         }
-                        return rs + s.substring(idx, len);      
+                        return rs + s.substring(idx, len);
                 }
         }
 }

@@ -156,13 +156,13 @@ package com.lorentz.SVG{
                 public static function getColorByName(name:String):String {
                         return colors[name.toLowerCase()];
                 }
-                
+
                 public static function parseToInt(s:String):uint {
                         if(s==null)
                                 return 0x000000;
-                                
+
                         s = StringUtil.trim(s);
-                        
+
                         if(s=="none" || s==""){
                                 return 0x000000;
                         } else if(s.charAt(0)=="#") {
@@ -179,7 +179,7 @@ package com.lorentz.SVG{
                                 return parseToInt(getColorByName(s));
                         }
                 }
-                
+
                 //Used in another project, can be deleted.
                 public static function flashToSVG(color:uint):String{
                         var colorText:String = color.toString(16);

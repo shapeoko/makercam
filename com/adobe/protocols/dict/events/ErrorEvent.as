@@ -2,13 +2,13 @@ package com.adobe.protocols.dict.events
 {
 	import flash.events.Event;
 	import com.adobe.protocols.dict.Dict;
-	
+
 	public class ErrorEvent
 		extends Event
 	{
 		private var _code:uint;
 		private var _message:String;
-		
+
 		public function ErrorEvent()
 		{
 			super(Dict.ERROR);

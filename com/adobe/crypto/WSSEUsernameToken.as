@@ -2,25 +2,25 @@
   Copyright (c) 2008, Adobe Systems Incorporated
   All rights reserved.
 
-  Redistribution and use in source and binary forms, with or without 
+  Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice, 
+  * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
-  
+
   * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the 
+    notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-  
-  * Neither the name of Adobe Systems Incorporated nor the names of its 
-    contributors may be used to endorse or promote products derived from 
+
+  * Neither the name of Adobe Systems Incorporated nor the names of its
+    contributors may be used to endorse or promote products derived from
     this software without specific prior written permission.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
   IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
   THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -34,11 +34,11 @@ package com.adobe.crypto
 {
 	import mx.formatters.DateFormatter;
 	import mx.utils.Base64Encoder;
-	
+
 	/**
 	 * Web Services Security Username Token
 	 *
-	 * Implementation based on algorithm description at 
+	 * Implementation based on algorithm description at
 	 * http://www.oasis-open.org/committees/wss/documents/WSS-Username-02-0223-merged.pdf
 	 */
 	public class WSSEUsernameToken
@@ -64,13 +64,13 @@ package com.adobe.crypto
 				nonce = generateNonce();
 			}
 			nonce = base64Encode(nonce);
-		
+
 			var created:String = generateTimestamp(timestamp);
-		
+
 			var password64:String = getBase64Digest(nonce,
 				created,
 				password);
-		
+
 			var token:String = new String("UsernameToken Username=\"");
 			token += username + "\", " +
 					 "PasswordDigest=\"" + password64 + "\", " +
@@ -78,7 +78,7 @@ package com.adobe.crypto
 					 "Created=\"" + created + "\"";
 			return token;
 		}
-		
+
 		private static function generateNonce():String
 		{
 			// Math.random returns a Number between 0 and 1.  We don't want our
@@ -87,14 +87,14 @@ package com.adobe.crypto
 			var s:String =  Math.random().toString();
 			return s.replace(".", "");
 		}
-		
+
 		internal static function base64Encode(s:String):String
 		{
 			var encoder:Base64Encoder = new Base64Encoder();
 			encoder.encode(s);
 			return encoder.flush();
 		}
-		
+
 		internal static function generateTimestamp(timestamp:Date):String
 		{
 			if (timestamp == null)
@@ -105,7 +105,7 @@ package com.adobe.crypto
 			dateFormatter.formatString = "YYYY-MM-DDTJJ:NN:SS"
 			return dateFormatter.format(timestamp) + "Z";
 		}
-		
+
 		internal static function getBase64Digest(nonce:String, created:String, password:String):String
 		{
 			return SHA1.hashToBase64(nonce + created + password);

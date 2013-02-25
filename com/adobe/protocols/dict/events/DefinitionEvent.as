@@ -8,17 +8,17 @@ package com.adobe.protocols.dict.events
 		extends Event
 	{
 		private var _definition:Definition;
-		
+
 		public function DefinitionEvent()
 		{
 			super(Dict.DEFINITION);
 		}
-		
+
 		public function set definition(definition:Definition):void
 		{
 			this._definition = definition;
 		}
-		
+
 		public function get definition():Definition
 		{
 			return this._definition;

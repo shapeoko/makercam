@@ -1,18 +1,18 @@
 ﻿package com.lorentz.SVG {
         public class PathCommand {
                 import flash.geom.Point;
-               
+
                 public var type:String;
                 public var _args:Array;
-               
+
                 //Used in another project, can be deleted.
                 public var extra:Object;
-               
+
                 public function PathCommand(type:String = null, args:Array = null){
                         this.type = type;
                         this._args = args;
                 }
-               
+
 
                 public function get args():Array{
                         if(_args==null){
@@ -20,7 +20,7 @@
                         }
                         return _args;
                 }
-               
+
                 public function set args(value:*):void{
                         _args = value;
                 }

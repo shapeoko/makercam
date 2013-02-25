@@ -2,25 +2,25 @@
   Copyright (c) 2008, Adobe Systems Incorporated
   All rights reserved.
 
-  Redistribution and use in source and binary forms, with or without 
+  Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice, 
+  * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
-  
+
   * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the 
+    notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-  
-  * Neither the name of Adobe Systems Incorporated nor the names of its 
-    contributors may be used to endorse or promote products derived from 
+
+  * Neither the name of Adobe Systems Incorporated nor the names of its
+    contributors may be used to endorse or promote products derived from
     this software without specific prior written permission.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
   IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
   THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -32,7 +32,7 @@
 
 package com.adobe.crypto
 {
-    import com.adobe.utils.IntUtil;   
+    import com.adobe.utils.IntUtil;
     import flash.utils.ByteArray;
 
     /**
@@ -47,7 +47,7 @@ package com.adobe.crypto
      * window of flash player. Usage: create an instance, call
      * update(data) repeatedly for all chunks and finally complete()
      * which will return the md5 hash.
-     */      
+     */
     public class MD5Stream
     {
         private static var mask:int = 0xFF;
@@ -56,13 +56,13 @@ package com.adobe.crypto
 
         /* running count of length */
         private var arrLen:int;
-        
+
         // initialize the md buffers
         private var a:int = 1732584193;
         private var b:int = -271733879;
         private var c:int = -1732584194;
         private var d:int = 271733878;
-        
+
         // variables to store previous values
         private var aa:int;
         private var bb:int;
@@ -75,20 +75,20 @@ package com.adobe.crypto
         private var arrProcessIndex:int = 0;
         /* index for removing stale arr values */
         private var cleanIndex:int = 0;
-        
-        /** 
+
+        /**
          * Change this value from the default (16384) in the range of
          * MBs to actually affect GC as GC allocates in pools of
          * memory */
         public var memoryBlockSize:int = 16384;
-        
-        
+
+
         public function MD5Stream()
         {
-            
+
         }
-               
-        
+
+
         /**
          * Pass in chunks of the input data with update(), call
          * complete() with an optional chunk which will return the
@@ -108,9 +108,9 @@ package com.adobe.crypto
                 if ( input == null )
                 {
                     throw new Error("null input to complete without prior call to update. At least an empty bytearray must be passed.");
-                }		 		
+                }
             }
-            
+
             if ( input != null )
             {
                 readIntoArray(input);
@@ -120,11 +120,11 @@ package com.adobe.crypto
             padArray(arrLen);
 
             hashRemainingChunks(false);
-            
-            var res:String = IntUtil.toHex( a ) + IntUtil.toHex( b ) + 
+
+            var res:String = IntUtil.toHex( a ) + IntUtil.toHex( b ) +
             				 IntUtil.toHex( c ) + IntUtil.toHex( d );
             resetFields();
-            
+
             return res;
         }
 
@@ -138,7 +138,7 @@ package com.adobe.crypto
          * @langversion ActionScript 3.0
          * @playerversion Flash 8.5
          * @tiptext
-         */        
+         */
         public function update(input:ByteArray):void
         {
             readIntoArray(input);
@@ -153,36 +153,36 @@ package com.adobe.crypto
          * @langversion ActionScript 3.0
          * @playerversion Flash 8.5
          * @tiptext
-         */               
+         */
         public function resetFields():void
         {
             //truncate array
             arr.length = 0;
             arrLen = 0;
-            
+
             // initialize the md buffers
             a = 1732584193;
             b = -271733879;
             c = -1732584194;
             d = 271733878;
-            
+
             // variables to store previous values
             aa = 0;
             bb = 0;
             cc = 0;
             dd = 0;
-            
-            arrIndexLen = 0;            
+
+            arrIndexLen = 0;
             arrProcessIndex = 0;
             cleanIndex = 0;
         }
-        
+
         /** read into arr and free up used blocks of arr */
         private function readIntoArray(input:ByteArray):void
         {
             var closestChunkLen:int = input.length * 8;
             arrLen += closestChunkLen;
-            
+
             /* clean up memory. if there are entries in the array that
              * are already processed and the amount is greater than
              * memoryBlockSize, create a new array, copy the last
@@ -191,29 +191,29 @@ package com.adobe.crypto
             if ( arrProcessIndex - cleanIndex > memoryBlockSize )
             {
                 var newarr:Array= new Array();
-                
-                /* AS Arrays in sparse arrays. arr[2002] can exist 
+
+                /* AS Arrays in sparse arrays. arr[2002] can exist
                  * without values for arr[0] - arr[2001] */
                 for ( var j:int = arrProcessIndex; j < arr.length; j++ )
-                {						
+                {
                     newarr[j] = arr[j];
                 }
-                
+
                 cleanIndex = arrProcessIndex;
                 arr = null;
                 arr = newarr;
             }
-            
+
             for ( var k:int = 0; k < closestChunkLen; k+=8 )
             {
                 //discard high bytes (convert to uint)
                 arr[ int(arrIndexLen >> 5) ] |= ( input[ k / 8 ] & mask ) << ( arrIndexLen % 32 );
                 arrIndexLen += 8;
             }
-            
-            
+
+
         }
-        
+
         private function hashRemainingChunks(bUpdate:Boolean=true):void
         {
             var len:int = arr.length;
@@ -233,15 +233,15 @@ package com.adobe.crypto
                 return;
             }
 
-            
-            for ( var i:int = arrProcessIndex; i < len ; i += 16, arrProcessIndex += 16) 
-            {            	
+
+            for ( var i:int = arrProcessIndex; i < len ; i += 16, arrProcessIndex += 16)
+            {
                 // save previous values
                 aa = a;
                 bb = b;
                 cc = c;
-                dd = d;                         
-                
+                dd = d;
+
                 // Round 1
                 a = ff( a, b, c, d, arr[int(i+ 0)],  7, -680876936 );     // 1
                 d = ff( d, a, b, c, arr[int(i+ 1)], 12, -389564586 );     // 2
@@ -259,7 +259,7 @@ package com.adobe.crypto
                 d = ff( d, a, b, c, arr[int(i+13)], 12, -40341101 );      // 14
                 c = ff( c, d, a, b, arr[int(i+14)], 17, -1502002290 );    // 15
                 b = ff( b, c, d, a, arr[int(i+15)], 22, 1236535329 );     // 16
-                
+
                 // Round 2
                 a = gg( a, b, c, d, arr[int(i+ 1)],  5, -165796510 );     // 17
                 d = gg( d, a, b, c, arr[int(i+ 6)],  9, -1069501632 );    // 18
@@ -277,7 +277,7 @@ package com.adobe.crypto
                 d = gg( d, a, b, c, arr[int(i+ 2)],  9, -51403784 );      // 30
                 c = gg( c, d, a, b, arr[int(i+ 7)], 14, 1735328473 );     // 31
                 b = gg( b, c, d, a, arr[int(i+12)], 20, -1926607734 );    // 32
-                
+
                 // Round 3
                 a = hh( a, b, c, d, arr[int(i+ 5)],  4, -378558 );        // 33
                 d = hh( d, a, b, c, arr[int(i+ 8)], 11, -2022574463 );    // 34
@@ -295,7 +295,7 @@ package com.adobe.crypto
                 d = hh( d, a, b, c, arr[int(i+12)], 11, -421815835 );     // 46
                 c = hh( c, d, a, b, arr[int(i+15)], 16, 530742520 );      // 47
                 b = hh( b, c, d, a, arr[int(i+ 2)], 23, -995338651 );     // 48
-                
+
                 // Round 4
                 a = ii( a, b, c, d, arr[int(i+ 0)],  6, -198630844 );     // 49
                 d = ii( d, a, b, c, arr[int(i+ 7)], 10, 1126891415 );     // 50
@@ -313,53 +313,53 @@ package com.adobe.crypto
                 d = ii( d, a, b, c, arr[int(i+11)], 10, -1120210379 );    // 62
                 c = ii( c, d, a, b, arr[int(i+ 2)], 15, 718787259 );      // 63
                 b = ii( b, c, d, a, arr[int(i+ 9)], 21, -343485551 );     // 64
-                
+
                 a += aa;
                 b += bb;
                 c += cc;
                 d += dd;
-                
+
             }
-            
+
         }
-        
+
         private function padArray(len:int):void
-        {	 		
+        {
             arr[ int(len >> 5) ] |= 0x80 << ( len % 32 );
             arr[ int(( ( ( len + 64 ) >>> 9 ) << 4 ) + 14) ] = len;
             arrLen = arr.length;
-        }  
-        
-        /* Code below same as com.adobe.crypto.MD5 */ 
-        
+        }
+
+        /* Code below same as com.adobe.crypto.MD5 */
+
         /**
          * Auxiliary function f as defined in RFC
          */
         private static function f( x:int, y:int, z:int ):int {
             return ( x & y ) | ( (~x) & z );
         }
-        
+
         /**
          * Auxiliary function g as defined in RFC
          */
         private static function g( x:int, y:int, z:int ):int {
             return ( x & z ) | ( y & (~z) );
         }
-        
+
         /**
          * Auxiliary function h as defined in RFC
          */
         private static function h( x:int, y:int, z:int ):int {
             return x ^ y ^ z;
         }
-        
+
         /**
          * Auxiliary function i as defined in RFC
          */
         private static function i( x:int, y:int, z:int ):int {
             return y ^ ( x | (~z) );
         }
-        
+
         /**
          * A generic transformation function.  The logic of ff, gg, hh, and
          * ii are all the same, minus the function used, so pull that logic
@@ -369,34 +369,34 @@ package com.adobe.crypto
             var tmp:int = a + int( func( b, c, d ) ) + x + t;
             return IntUtil.rol( tmp, s ) +  b;
         }
-        
+
         /**
          * ff transformation function
          */
         private static function ff ( a:int, b:int, c:int, d:int, x:int, s:int, t:int ):int {
             return transform( f, a, b, c, d, x, s, t );
         }
-        
+
         /**
          * gg transformation function
          */
         private static function gg ( a:int, b:int, c:int, d:int, x:int, s:int, t:int ):int {
             return transform( g, a, b, c, d, x, s, t );
         }
-        
+
         /**
          * hh transformation function
          */
         private static function hh ( a:int, b:int, c:int, d:int, x:int, s:int, t:int ):int {
             return transform( h, a, b, c, d, x, s, t );
         }
-        
+
         /**
          * ii transformation function
          */
         private static function ii ( a:int, b:int, c:int, d:int, x:int, s:int, t:int ):int {
             return transform( i, a, b, c, d, x, s, t );
         }
-        
+
     }
 }

@@ -2,25 +2,25 @@
   Copyright (c) 2008, Adobe Systems Incorporated
   All rights reserved.
 
-  Redistribution and use in source and binary forms, with or without 
+  Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice, 
+  * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
-  
+
   * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the 
+    notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-  
-  * Neither the name of Adobe Systems Incorporated nor the names of its 
-    contributors may be used to endorse or promote products derived from 
+
+  * Neither the name of Adobe Systems Incorporated nor the names of its
+    contributors may be used to endorse or promote products derived from
     this software without specific prior written permission.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
   IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
   THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -39,22 +39,22 @@ package com.adobe.net.proxies
 	/**
 	 * This class allows TCP socket connections through HTTP proxies in accordance with
 	 * RFC 2817:
-	 * 
+	 *
 	 * ftp://ftp.rfc-editor.org/in-notes/rfc2817.txt
-	 * 
+	 *
 	 * It can also be used to make direct connections to a destination, as well. If you
 	 * pass the host and port into the constructor, no proxy will be used. You can also
 	 * call connect, passing in the host and the port, and if you didn't set the proxy
 	 * info, a direct connection will be made. A proxy is only used after you have called
 	 * the setProxyInfo function.
-	 * 
+	 *
 	 * The connection to and negotiation with the proxy is completely hidden. All the
 	 * same events are thrown whether you are using a proxy or not, and the data you
 	 * receive from the target server will look exact as it would if you were connected
 	 * to it directly rather than through a proxy.
-	 * 
+	 *
 	 * @author Christian Cantrell
-	 * 
+	 *
 	 **/
 	public class RFC2817Socket
 		extends Socket
@@ -75,7 +75,7 @@ package com.adobe.net.proxies
 		{
 			super(host, port);
 		}
-		
+
 		/**
 		 * Set the proxy host and port number. Your connection will only proxied if
 		 * this function has been called.
@@ -98,7 +98,7 @@ package com.adobe.net.proxies
 				super.removeEventListener(Event.CONNECT, deferredConnectHandler.listener, deferredConnectHandler.useCapture);
 			}
 		}
-		
+
 		/**
 		 * Connect to the specified host over the specified port. If you want your
 		 * connection proxied, call the setProxyInfo function first.
@@ -127,7 +127,7 @@ package com.adobe.net.proxies
 			this.flush();
 			this.redirectConnectEvent();
 		}
-		
+
 		private function onSocketData(event:ProgressEvent):void
 		{
 			while (this.bytesAvailable != 0)
@@ -140,7 +140,7 @@ package com.adobe.net.proxies
 				}
 			}
 		}
-		
+
 		private function checkResponse(event:ProgressEvent):void
 		{
 			var responseCode:String = this.buffer.substr(this.buffer.indexOf(" ")+1, 3);
@@ -162,27 +162,27 @@ package com.adobe.net.proxies
 			}
 			this.buffer = null;
 		}
-		
+
 		private function redirectConnectEvent():void
 		{
 			super.removeEventListener(Event.CONNECT, onConnect);
 			var deferredEventHandler:Object = this.deferredEventHandlers[Event.CONNECT];
 			if (deferredEventHandler != null)
 			{
-				super.addEventListener(Event.CONNECT, deferredEventHandler.listener, deferredEventHandler.useCapture, deferredEventHandler.priority, deferredEventHandler.useWeakReference);			
+				super.addEventListener(Event.CONNECT, deferredEventHandler.listener, deferredEventHandler.useCapture, deferredEventHandler.priority, deferredEventHandler.useWeakReference);
 			}
 		}
-		
+
 		private function redirectSocketDataEvent():void
 		{
 			super.removeEventListener(ProgressEvent.SOCKET_DATA, onSocketData);
 			var deferredEventHandler:Object = this.deferredEventHandlers[ProgressEvent.SOCKET_DATA];
 			if (deferredEventHandler != null)
 			{
-				super.addEventListener(ProgressEvent.SOCKET_DATA, deferredEventHandler.listener, deferredEventHandler.useCapture, deferredEventHandler.priority, deferredEventHandler.useWeakReference);			
+				super.addEventListener(ProgressEvent.SOCKET_DATA, deferredEventHandler.listener, deferredEventHandler.useCapture, deferredEventHandler.priority, deferredEventHandler.useWeakReference);
 			}
 		}
-		
+
 		public override function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int=0.0, useWeakReference:Boolean=false):void
 		{
 			if (type == Event.CONNECT || type == ProgressEvent.SOCKET_DATA)

@@ -2,25 +2,25 @@
   Copyright (c) 2008, Adobe Systems Incorporated
   All rights reserved.
 
-  Redistribution and use in source and binary forms, with or without 
+  Redistribution and use in source and binary forms, with or without
   modification, are permitted provided that the following conditions are
   met:
 
-  * Redistributions of source code must retain the above copyright notice, 
+  * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
-  
+
   * Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the 
+    notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-  
-  * Neither the name of Adobe Systems Incorporated nor the names of its 
-    contributors may be used to endorse or promote products derived from 
+
+  * Neither the name of Adobe Systems Incorporated nor the names of its
+    contributors may be used to endorse or promote products derived from
     this software without specific prior written permission.
 
   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
   IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
   THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
@@ -38,7 +38,7 @@ package com.adobe.images
 
 	/**
 	 * Class that converts BitmapData into a valid PNG
-	 */	
+	 */
 	public class PNGEncoder
 	{
 		/**
@@ -49,7 +49,7 @@ package com.adobe.images
 		 * @langversion ActionScript 3.0
 		 * @playerversion Flash 9.0
 		 * @tiptext
-		 */			
+		 */
 	    public static function encode(img:BitmapData):ByteArray {
 	        // Create output byte array
 	        var png:ByteArray = new ByteArray();
@@ -92,11 +92,11 @@ package com.adobe.images
 	        // return PNG
 	        return png;
 	    }
-	
+
 	    private static var crcTable:Array;
 	    private static var crcTableComputed:Boolean = false;
-	
-	    private static function writeChunk(png:ByteArray, 
+
+	    private static function writeChunk(png:ByteArray,
 	            type:uint, data:ByteArray):void {
 	        if (!crcTableComputed) {
 	            crcTableComputed = true;
@@ -106,7 +106,7 @@ package com.adobe.images
 	                c = n;
 	                for (var k:uint = 0; k < 8; k++) {
 	                    if (c & 1) {
-	                        c = uint(uint(0xedb88320) ^ 
+	                        c = uint(uint(0xedb88320) ^
 	                            uint(c >>> 1));
 	                    } else {
 	                        c = uint(c >>> 1);
@@ -130,7 +130,7 @@ package com.adobe.images
 	        c = 0xffffffff;
 	        for (var i:int = 0; i < (e-p); i++) {
 	            c = uint(crcTable[
-	                (c ^ png.readUnsignedByte()) & 
+	                (c ^ png.readUnsignedByte()) &
 	                uint(0xff)] ^ uint(c >>> 8));
 	        }
 	        c = uint(c^uint(0xffffffff));

@@ -5,12 +5,12 @@ package com.adobe.protocols.dict
 		private var _definition:String;
 		private var _database:String;
 		private var _term:String;
-		
+
 		public function set definition(definition:String):void
 		{
 			this._definition = definition;
 		}
-		
+
 		public function get definition():String
 		{
 			return this._definition;
@@ -20,7 +20,7 @@ package com.adobe.protocols.dict
 		{
 			this._database = database;
 		}
-		
+
 		public function get database():String
 		{
 			return this._database;
@@ -30,7 +30,7 @@ package com.adobe.protocols.dict
 		{
 			this._term = term;
 		}
-		
+
 		public function get term():String
 		{
 			return this._term;

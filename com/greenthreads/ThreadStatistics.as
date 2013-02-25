@@ -12,22 +12,22 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
- */ 
+ */
 package com.greenthreads {
 	import flash.utils.getTimer;
-	
+
 	public class ThreadStatistics {
-		
+
 		public var numCycles:int;
 		public var numTimeouts:int;
-		
+
 		public var totalTime:int;
-		
+
 		public var times : Array;
 		public var allocationDifferentials : Array;
-		
+
 		private var currentCycleStart:int;
-		
+
 		public function ThreadStatistics() {
 			times = [];
 			allocationDifferentials = [];
@@ -36,38 +36,38 @@ package com.greenthreads {
 		public function startCycle() : void {
 			currentCycleStart = getTimer();
 		}
-		
+
 		public function endCycle( allocation:int ) : void {
-			
+
 			var time:Number = getTimer() - currentCycleStart;
-			
+
 			totalTime += time;
-			
+
 			times[ numCycles ] = time;
 			allocationDifferentials[ numCycles ] = time - allocation;
-			
+
 			numCycles++;
 		}
-		
+
 		public function recordTimeout() : void {
 			numTimeouts++;
 		}
-		
+
 		public function get meanTime() : Number {
-			return totalTime / numCycles; 
+			return totalTime / numCycles;
 		}
-		
+
 		public function get averageDifferential() : Number {
-			
+
 			var sum:int = 0;
-			
+
 			for each( var differential : int in allocationDifferentials ) {
 				sum += differential;
 			}
-			
+
 			return sum / numCycles;
 		}
-		
+
 		public function get maxTime() : int {
 			var max:int = 0;
 
@@ -77,27 +77,27 @@ package com.greenthreads {
 
 			return max;
 		}
-		
+
 		public function get minTime() : int {
 			var min:int = Number.MAX_VALUE;
-			
+
 			for each( var time : int in times ) {
 				min = Math.min( min, time );
 			}
-			
+
 			return min;
 		}
-		
+
 		public function print() : String {
-			return "Total Time: " + totalTime + "(ms)" + 
-					"\nNumber Of Cycles: " + numCycles + 
+			return "Total Time: " + totalTime + "(ms)" +
+					"\nNumber Of Cycles: " + numCycles +
 					"\nMean time per cycle: " + this.meanTime + "(ms)" +
 					"\nMinimum Time, Maximum Time " + this.minTime + "(ms), " + this.maxTime + " (ms)" +
 					"\nAverage Differential: " + this.averageDifferential + "(ms)" +
 					"\nAverage Allocation Diff: " + this.allocationDifferentials + "(ms)" +
-					"\nNumber Of Timeouts: " + numTimeouts;   
+					"\nNumber Of Timeouts: " + numTimeouts;
 		}
-		
-		
+
+
 	}
 }

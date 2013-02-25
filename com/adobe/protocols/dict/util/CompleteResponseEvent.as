@@ -16,7 +16,7 @@ package com.adobe.protocols.dict.util
 		{
 			this._response = response;
 		}
-		
+
 		public function get response():String
 		{
 			return this._response;

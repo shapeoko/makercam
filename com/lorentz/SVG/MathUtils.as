@@ -93,7 +93,7 @@ package com.lorentz.SVG
 
             return new Point(xInt, yInt);
         }
-                
+
         /**
             Robert Penner's Math method midLine.
 

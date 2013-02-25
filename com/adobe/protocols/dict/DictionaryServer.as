@@ -9,7 +9,7 @@ package com.adobe.protocols.dict
 		{
 			this._server = server;
 		}
-		
+
 		public function get server():String
 		{
 			return this._server;
@@ -19,7 +19,7 @@ package com.adobe.protocols.dict
 		{
 			this._description = description;
 		}
-		
+
 		public function get description():String
 		{
 			return this._description;

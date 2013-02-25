@@ -9,6 +9,6 @@ package com.adobe.protocols.dict.events
 		{
 			super(Dict.DISCONNECTED);
 		}
-		
+
 	}
 }

@@ -2,7 +2,7 @@ package com.adobe.protocols.dict
 {
 	import com.adobe.protocols.dict.events.*;
 	import com.adobe.protocols.dict.util.*;
-	
+
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IOErrorEvent;
@@ -35,7 +35,7 @@ package com.adobe.protocols.dict
 		public static var ALL_DATABASES:uint = 1;
 
 		private var socket:SocketHelper;
-		
+
 		private var dbShortList:Boolean;
 
 		public function Dict()
@@ -163,7 +163,7 @@ package com.adobe.protocols.dict
 		}
 
 		private function incomingData(event:CompleteResponseEvent):void
-		{			
+		{
 			var rawResponse:String = event.response;
 			var response:Response = this.parseRawResponse(rawResponse);
 			var responseCode:uint = response.code;
@@ -181,7 +181,7 @@ package com.adobe.protocols.dict
 			}
 			else if (responseCode == 110) // databases are being returned
 			{
-				throwDatabasesEvent(response);				
+				throwDatabasesEvent(response);
 			}
 			else if (responseCode == 111) // matches strategies
 			{

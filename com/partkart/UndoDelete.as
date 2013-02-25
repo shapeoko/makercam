@@ -1,15 +1,15 @@
 ﻿package com.partkart{
-	
+
 	public class UndoDelete extends Undo{
-		
+
 		public var pathlist:Array;
 		public var cutlist:Array;
 		public var cutparent:Array;
-		
+
 		public function UndoDelete(s:SceneGraph):void{
 			super(s);
 		}
-		
+
 		public override function undoAction():void{
 			for each(var path:Path in pathlist){
 				scene.addPath(path);
@@ -25,7 +25,7 @@
 				}
 			}
 		}
-		
+
 		public override function redoAction():void{
 			for each(var path:Path in pathlist){
 				scene.removePath(path);

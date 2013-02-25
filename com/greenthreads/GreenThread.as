@@ -12,7 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
- */ 
+ */
 package com.greenthreads {
 	import flash.errors.ScriptTimeoutError;
 	import flash.events.Event;
@@ -20,7 +20,7 @@ package com.greenthreads {
 	import flash.events.ProgressEvent;
 	import flash.utils.getTimer;
 	import flash.display.Sprite;
-	
+
 	[Event( name='complete', type='flash.events.Event' )]
 	[Event( name='timeout', type='org.greenthreads.ThreadEvent')]
 	[Event( name='progress', type='mx.events.ProgressEvent')]
@@ -29,11 +29,11 @@ package com.greenthreads {
 		protected var _progress : Number = NaN;
 		private var _debug : Boolean;
 		private var _statistics : ThreadStatistics;
-		
+
 		public function GreenThread( debug : Boolean = true ) {
 			_debug = debug;
 		}
-		
+
 		public final function start( share : Number = 0.99 ) : void {
 			ThreadProcessor.stage = this.stage;
 			ThreadProcessor.getInstance(share).addThread( this );
@@ -46,32 +46,32 @@ package com.greenthreads {
 		public final function stop() : void {
 			ThreadProcessor.getInstance().stop( this );
 		}
-		
+
 		protected function initialize() : void {
 		}
-		
+
 		protected function run() : Boolean {
 			return false;
 		}
-		
+
 		public final function execute( processAllocation : Number ) : Boolean {
 			if( debug ) statisitcs.startCycle();
-			
+
 			try {
 				var processStart:int = getTimer();
-				
+
 			    var loop : Boolean = true;
 				while( getTimer() - processStart < processAllocation && loop ) {
 					loop = run();
-				} 
+				}
 			} catch( error:ScriptTimeoutError ) {
 				if( debug ) statisitcs.recordTimeout();
 				dispatchEvent( new ThreadEvent( ThreadEvent.TIMEOUT ) );
 			}
-			
+
 			//record post process time
 			if( debug ) statisitcs.endCycle( processAllocation );
-		
+
 			if( !loop ) {
 				dispatchProgress();
 				dispatchEvent( new Event( Event.COMPLETE ) );
@@ -83,7 +83,7 @@ package com.greenthreads {
 			}
 			return true;
 		}
-		
+
 		private function dispatchProgress() : void {
 			if( isNaN(maximum) == false ) {
 				var evt : ProgressEvent = new ProgressEvent( ProgressEvent.PROGRESS );
@@ -92,34 +92,34 @@ package com.greenthreads {
 				dispatchEvent( evt );
 			}
 		}
-		
+
 		public function get progress() : Number {
 			return _progress;
 		}
-		
+
 		public function get maximum() : Number {
 			return _maximum;
 		}
-		
+
 		public function set maximum( value : Number ) : void {
 			_maximum = value;
 		}
-		
+
 		public function set progress( value : Number ) : void {
 			_progress = value;
 		}
-		
+
 		public function get debug() : Boolean {
 			return _debug;
 		}
-		
+
 		public function set debug( value : Boolean ) : void {
 			_debug = value;
 		}
-		
+
 		public function get statisitcs() : ThreadStatistics {
 			return _statistics;
 		}
-		
+
 	}
 }
