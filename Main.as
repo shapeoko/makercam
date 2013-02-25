@@ -709,15 +709,15 @@
 
 				// setup default values to populate fields
 
-				var safetyheight:Number = Global.unit == "in" ? 0.5 : 15;
+				var safetyheight:Number = Global.unit == "in" ? 0.125 : 15;
 				var stocksurface:String = "0";
-				var targetdepth:Number  = Global.unit == "in" ? -0.75 : -10;
-				var stepdown:Number = Global.unit == "in" ? 0.05 : 1.5;
+				var targetdepth:Number  = Global.unit == "in" ? -0.76 : -10;
+				var stepdown:Number = Global.unit == "in" ? 0.03125 : 1.5;
 				var stepover:Number = 40;
-				var feedrate:Number = Global.unit == "in" ? 60 : 1500;
-				var plungerate:Number = Global.unit == "in" ? 30 : 800;
+				var feedrate:Number = Global.unit == "in" ? 30 : 1500;
+				var plungerate:Number = Global.unit == "in" ? 10 : 800;
 
-				var tooldiameter:Number = Global.unit == "in" ? 0.25 : 5;
+				var tooldiameter:Number = Global.unit == "in" ? 0.125 : 5;
 				var roughingclearance:String = "0";
 				var dir:int = 1;
 
