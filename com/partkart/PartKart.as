@@ -272,21 +272,21 @@
 				i++;
 			}
 
-			// send the request to the server
-			var url:URLRequest = new URLRequest(posturl);
-			url.method = URLRequestMethod.POST;
+			//// send the request to the server
+			//var url:URLRequest = new URLRequest(posturl);
+			//url.method = URLRequestMethod.POST;
 
-			var variables:URLVariables = new URLVariables();
-			variables.data = JSON.encode(objlist);
-			url.data = variables;
+			//var variables:URLVariables = new URLVariables();
+			//variables.data = JSON.encode(objlist);
+			//url.data = variables;
 
-			var loader:URLLoader = new URLLoader();
-			loader.dataFormat = URLLoaderDataFormat.BINARY;
+			//var loader:URLLoader = new URLLoader();
+			//loader.dataFormat = URLLoaderDataFormat.BINARY;
 
-			loader.addEventListener(Event.COMPLETE, orderComplete);
-			loader.addEventListener(IOErrorEvent.IO_ERROR, orderError);
+			//loader.addEventListener(Event.COMPLETE, orderComplete);
+			//loader.addEventListener(IOErrorEvent.IO_ERROR, orderError);
 
-			loader.load(url);
+			//loader.load(url);
 		}
 
 		protected function orderError(e:IOErrorEvent):void{
