@@ -1087,7 +1087,7 @@
 				var residualx:Number = Math.abs(globalx - Math.round(globalx))*Global.zoom;
 				var residualy:Number = Math.abs(globaly - Math.round(globaly))*Global.zoom;
 
-				trace(residualx, residualy);
+//				trace(residualx, residualy);
 
 				if(residualx < xerror){
 					xerror = residualx;

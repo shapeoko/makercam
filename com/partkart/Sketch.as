@@ -286,7 +286,7 @@
 				}
 			}
 
-			trace(grouplist);
+//			trace(grouplist);
 
 			// now we implement the angle changes and write it back to the outputlist
 
@@ -847,7 +847,7 @@
 				control.y = pointlist[Math.floor((ind1+ind2)/2)].y/Global.zoom;
 			}
 
-			trace(control);
+//			trace(control);
 
 			var bezier:QuadBezierSegment = new QuadBezierSegment(c1,c2,control);
 

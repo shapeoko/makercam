@@ -651,6 +651,7 @@
 														{type:"label", label:""},
 														{type:"checkbox", label:"Snap to local points", value:Global.localsnap},
 														{type:"label", label:""},
+														{type: "number", label: "Output Precision (numbers after decimal)", value: Global.precision},
 														{type: "number", label: "Machining Tolerance ("+Global.unit+")", value: Global.tolerance},
 														{type: "number", label: "Bitmap Tolerance", value: Global.bitmaptolerance},
 														{type: "number", label: "Nesting Bitmap Size", value: Global.nestbitmapsize},
@@ -930,7 +931,7 @@
 						var processed:Array = scene.getProcessedCuts();
 						var fields:Array = new Array();
 						for each(cut in processed){
-							fields.push({label: cut.name + " ("+Global.toFixed(cut.tooldiameter, 10*Math.ceil(1/Global.tolerance))+")", data: cut, diameter: cut.tooldiameter, active: cut.active});
+							fields.push({label: cut.name + " ("+Global.toFixed(cut.tooldiameter, Global.precision)+")", data: cut, diameter: cut.tooldiameter, active: cut.active});
 						}
 						startDialog(300,200, new Array({type:"cutlist", label:"calculated toolpaths", value: fields},
 												   {type:"combobox", label:false, items:new Array({label:"Standard G-Code", data:0}), value: 0}),
@@ -1288,7 +1289,7 @@
 
 			var processor:PostProcessor = new PostProcessor(cutlist);
 			var gcode:String = processor.process();
-
+//			trace(gcode);
 			if(gcode != null){
 				file = new FileReference();
 				file.save(gcode, "part.nc");
@@ -1534,7 +1535,7 @@
 					var snap:Boolean = flist[4].input.selected;
 					Global.localsnap = snap;
 
-					var tolerance:Number = Number(flist[6].input.text);
+					var tolerance:Number = Number(flist[7].input.text);
 
 					if(!isNaN(tolerance) && tolerance != 0){
 						if(tolerance < 0){
@@ -1543,7 +1544,7 @@
 						Global.tolerance = tolerance;
 					}
 
-					var bitmaptolerance:Number = Number(flist[7].input.text)
+					var bitmaptolerance:Number = Number(flist[8].input.text)
 
 					if(!isNaN(bitmaptolerance) && bitmaptolerance != 0){
 						if(bitmaptolerance < 0){
@@ -1552,7 +1553,7 @@
 						Global.bitmaptolerance = bitmaptolerance;
 					}
 
-					var nestbitmapsize:Number = Number(flist[8].input.text)
+					var nestbitmapsize:Number = Number(flist[9].input.text)
 
 					if(!isNaN(nestbitmapsize)){
 						if(nestbitmapsize < 400){
@@ -1563,8 +1564,9 @@
 						}
 						Global.nestbitmapsize = Math.floor(nestbitmapsize);
 					}
+					Global.precision = int(flist[6].input.text);
 
-					Global.separatetoolpaths = flist[9].input.selected;
+					Global.separatetoolpaths = flist[10].input.selected;
 
 				break;
 				case "addcircle":

@@ -23,8 +23,9 @@
 
 		public static var importres:Number = 72;
 		public static var localsnap:Boolean = true;
-
+		
 		public static var tolerance:Number = 0.001; // global tolerance for cam operations
+		public static var precision:int = 4;
 		public static var bitmaptolerance:Number = 0.007;
 		public static var bitmapsize:Number = 4000;
 		public static var nestbitmapsize:Number = 1000;
@@ -68,10 +69,20 @@
 			return false;
 		}
 
+		/*
+		This gives very wonky results with metric, so simplify the 'precision' param 
+		to indicate a 'decimal place precision', much simpler for GRBL owners
+		See this SO question:
+		http://stackoverflow.com/questions/632802/how-to-deal-with-number-precision-in-actionscript
+		
 		public static function toFixed(number:Number, factor:Number):Number{
 			return (Math.round(number * factor)/factor);
+		}*/
+		public static function toFixed(number:Number, precision:int) {
+		 precision = Math.pow(10, precision);
+		 return Math.round(number * precision)/precision;
 		}
-
+		
 		// returns the angle between two vectors
 		public static function getAngle(v1:Point, v2:Point):Number{
 			v1.normalize(1);
