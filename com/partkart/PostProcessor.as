@@ -24,7 +24,7 @@
 			if(Global.unit == "in"){
 				output += "G20 G90 G40\r\n";
 			}
-			else{
+			else{	
 				output += "G21 G90 G40\r\n";
 			}
 
@@ -68,7 +68,7 @@
 
 			var tool:int = tools.indexOf(cut.tooldiameter);
 
-			var factor:int = 10*Math.ceil(1/Global.tolerance);
+			var factor:int = Global.precision;
 			if(factor < 1){
 				factor = 1;
 			}
@@ -142,7 +142,7 @@
 		protected function processPocket(cut:PocketCutObject):String{
 			var tool:int = tools.indexOf(cut.tooldiameter);
 
-			var factor:int = 10*Math.ceil(1/Global.tolerance);
+			var factor:int = Global.precision;
 			if(factor < 1){
 				factor = 1;
 			}
@@ -228,7 +228,7 @@
 			var tool:int = tools.indexOf(cut.tooldiameter);
 
 			// we want to output 1 more digit than the specified tolerances
-			var factor:int = 10*Math.ceil(1/Global.tolerance);
+			var factor:int = Global.precision;
 			if(factor < 1){
 				factor = 1;
 			}
@@ -299,7 +299,7 @@
 			var tool:int = tools.indexOf(cut.tooldiameter);
 
 			// we want to output 1 more digit than the specified tolerances
-			var factor:int = 10*Math.ceil(1/Global.tolerance);
+			var factor:int = Global.precision;
 			if(factor < 1){
 				factor = 1;
 			}
@@ -369,7 +369,7 @@
 				tab = tablist.shift();
 			}
 
-			var factor:int = 10*Math.ceil(1/Global.tolerance);
+			var factor:int = Global.precision;
 			if(factor < 1){
 				factor = 1;
 			}
@@ -403,28 +403,27 @@
 
 				var X:Number = seglist[i].p2.x+docx;
 				var Y:Number = seglist[i].p2.y-docy;
-
-				X = Number(Global.toFixed(X,factor));
-				Y = Number(Global.toFixed(Y,factor));
-
+				trace(factor, Global.tolerance, Math.ceil(1/Global.tolerance));
 				// turn cm to mm
 				if(Global.unit == "cm"){
 					X *= 10;
 					Y *= 10;
 				}
 
+				X = Number(Global.toFixed(X,factor));
+				Y = Number(Global.toFixed(Y,factor));
+
 				if(seglist[i] is CircularArc && seglist[i].getLength() > Global.tolerance){
 					var I:Number = seglist[i].center.x-seglist[i].p1.x;
 					var J:Number = seglist[i].center.y-seglist[i].p1.y;
-
-					I = Number(Global.toFixed(I, factor));
-					J = Number(Global.toFixed(J, factor));
-
 					// turn cm to mm
 					if(Global.unit == "cm"){
 						I *= 10;
 						J *= 10;
 					}
+
+					I = Number(Global.toFixed(I, factor));
+					J = Number(Global.toFixed(J, factor));
 
 					if(isClockwise(seglist[i])){
 						slice += "G2 X"+X+" Y"+Y+" I"+I+" J"+J;

@@ -163,7 +163,7 @@
 			var midx:Point = new Point(mida.x+(midb.x-mida.x)*t,mida.y+(midb.y-mida.y)*t);
 
 			if(t != 0.5){
-				trace(midx.x, midx.y);
+//				trace(midx.x, midx.y);
 			}
 
 			/*var bezier:BezierSegment = new BezierSegment(seg.p1,seg.c1,seg.c2,seg.p2);
