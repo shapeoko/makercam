@@ -850,10 +850,20 @@
 						return;
 					}
 
-					startDialog(150,200, new Array({type:"number", label:"tab spacing ("+Global.unit+")", value: Global.unit == "in" ? 5 : 15},
-												   {type:"number", label:"tab width ("+Global.unit+")", value: Global.unit == "in" ? .25 : 0.5},
-												   {type:"number", label:"tab height ("+Global.unit+")", value: Global.unit == "in" ? .25 : 0.5}),
-												   "tabs");
+					if(Global.unit == "in")
+					{
+						startDialog(150,200, new Array({type:"number", label:"tab spacing (in)", value: 5},
+													   {type:"number", label:"tab width (in)", value: .25},
+													   {type:"number", label:"tab height (in)", value: .25 :}),
+													   "tabs");
+												 }
+					else
+					{
+						startDialog(150,200, new Array({type:"number", label:"tab spacing (cm)", value: 15},
+													   {type:"number", label:"tab width (cm)", value: 0.5},
+													   {type:"number", label:"tab height (mm)", value: 5}),
+													   "tabs");
+					}
 					break;
 					case 5:
 						var pd:ProgressDialog = startProgressDialog(250, 75, "processing", "Cancel", scene.cutCancel);
