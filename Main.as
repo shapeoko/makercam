@@ -854,7 +854,7 @@
 					{
 						startDialog(150,200, new Array({type:"number", label:"tab spacing (in)", value: 5},
 													   {type:"number", label:"tab width (in)", value: .25},
-													   {type:"number", label:"tab height (in)", value: .25 :}),
+													   {type:"number", label:"tab height (in)", value: .25}),
 													   "tabs");
 												 }
 					else
